@@ -1,2 +1,15 @@
 # DRDOSLIB-TP
 Bibliothèque en Turbo Pascal permettant d'accéder aux fonctionnalités particulières du DR-DOS comme par exemple le gestionnaire multi-tâches,...
+
+<h3>Liste des unités</h3>
+
+<table>
+  <tr>
+    <th>Nom</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><b>TASKMGR.PAS</b></td>
+    <td>Cette unité contient les définitions, les procédures et fonctions pour manipuler le gestionnaire multi-tâche du DR-DOS (TaskMAX ou TaskMgr).</td>
+  </tr>
+</table>
