@@ -20,6 +20,11 @@ Bibliothèque en Turbo Pascal permettant d'accéder aux fonctionnalités particu
     <td><b>MSERROR.PAS</b></td>
     <td>Cette unité contient les définitions de compatibilité des erreurs MS-DOS avec le système d'exploitation DR-DOS.</td>
   <tr>
+  <tr>
+    <td><b>SECURITY.PAS</b></td>
+    <td>Cette unité contient les définitions de sécurités du DR-DOS.</td>
+  </tr>
+  <tr>
     <td><b>TASKMGR.PAS</b></td>
     <td>Cette unité contient les définitions, les procédures et fonctions pour manipuler le gestionnaire multi-tâche du DR-DOS (TaskMAX ou TaskMgr).</td>
   </tr>
