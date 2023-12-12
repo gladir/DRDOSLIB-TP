@@ -8,6 +8,8 @@ Unit Support;
 
 INTERFACE
 
+Uses COMMAND;
+
 Const
  CLS_KEY='$CLS=';
  REVON_KEY='$ON=';
@@ -24,19 +26,7 @@ Const
  {$ENDIF}
 
 Var
- Country:Record
-  dt_fmt:Word;
-  Currcy:Array[0..4]of Char;
-  d1000:Array[0..1]of Char;
-  ddecm:Array[0..1]of Char;
-  ddate:Array[0..1]of Char;
-  dtime:Array[0..1]of Char;
-  cflg:Byte;
-  cdec:Byte;
-  ampm:Byte;
-  Internl:Array[0..13]of Byte;
-  Code:Word;
- End;
+ Country:INTERNAT;
 
 Function Disp_FileTime(Time:Word):String;
 Function IsDigit(b:Char):Boolean;

@@ -8,19 +8,36 @@ Unit DOSIF;
 
 INTERFACE
 
+Uses COMMAND;
+
 Function  Ioctl_Ver:Word;
+Function  MS_Drv_Get:Word;
+Procedure MS_Drv_Set(X:Byte);
 Function  MS_F_GetVerify:Byte;
 Function  MS_Idle_Ptr:Pointer;
 Function  MS_P_GetPSP:Pointer;
+Function  MS_S_Country(Var CountryInfo:INTERNAT):Word;
 Function  MS_Switchar:Char;
 Function  MS_X_SetCP(GlobalCP:Word):Word;
 
 IMPLEMENTATION
 
-Uses MSDOS;
+Uses DOS,MSDOS;
 
 Const
  DOS_INT=$21;
+
+Function MS_Drv_Get:Word;Assembler;ASM
+ MOV AH,MSDOS.MS_DRV_GET
+ INT DOS_INT
+ CBW
+END;
+
+Procedure MS_Drv_Set(X:Byte);Assembler;ASM
+ MOV DL,X
+ MOV AH,MSDOS.MS_DRV_SET
+ INT DOS_INT
+END;
 
 Function MS_F_GetVerify:Byte;Assembler;ASM
  MOV AH,MSDOS.MS_F_GETVERIFY
@@ -45,6 +62,17 @@ Function MS_P_GetPSP:Pointer;Assembler;ASM
  INT  DOS_INT
  XCHG AX,BX
 END;
+
+Function MS_S_Country(Var CountryInfo:INTERNAT):Word;
+Var
+ Regs:Registers;
+Begin
+ Regs.AX:=MSDOS.MS_S_COUNTRY shl 8;
+ Regs.DS:=Seg(CountryInfo);
+ Regs.DX:=Ofs(CountryInfo);
+ Intr($21,Regs);
+ MS_S_Country:=Regs.BX;
+End;
 
 Function MS_Switchar:Char;Assembler;ASM
  MOV AX,3700h
