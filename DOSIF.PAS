@@ -18,6 +18,9 @@ Function  MS_Idle_Ptr:Pointer;
 Function  MS_P_GetPSP:Pointer;
 Function  MS_S_Country(Var CountryInfo:INTERNAT):Word;
 Function  MS_Switchar:Char;
+Function  MS_X_Creat(FileName:PChar;Mode:Byte):Word;
+Function  MS_X_FDup(DestHandle,CurrHandle:Word):Word;
+Function  MS_X_Open(FileName:PChar;Mode:Byte):Word;
 Function  MS_X_SetCP(GlobalCP:Word):Word;
 
 IMPLEMENTATION
@@ -94,6 +97,55 @@ Function Ioctl_Ver:Word;Assembler;ASM
 @cdos_v10:
  XOR AX,AX
 @Finish:
+END;
+
+Function MS_X_Close(Handle:Word):Word;Assembler;ASM
+ MOV BX,Handle
+ MOV AH,MSDOS.MS_X_CLOSE
+ INT DOS_INT
+ JNC @ms_dos_ok
+ NEG AX
+ JMP @ms_dos_ret
+@ms_dos_ok:
+ SUB AX,AX
+@ms_dos_ret:
+END;
+
+Function MS_X_Creat(FileName:PChar;Mode:Byte):Word;Assembler;ASM
+ PUSH DS
+  MOV AH,MSDOS.MS_X_CREAT
+  LDS DX,FileName
+  MOV AL,Mode
+  INT DOS_INT
+ POP DS
+ JNC @ms_creat_ret
+ NEG AX
+@ms_creat_ret:
+END;
+
+Function MS_X_FDup(DestHandle,CurrHandle:Word):Word;Assembler;ASM
+ MOV CX,DestHandle
+ MOV BX,CurrHandle
+ MOV AH,MSDOS.MS_X_DUP2
+ INT DOS_INT
+ JNC @ms_dos_ok
+ NEG AX
+ JMP @ms_dos_ret
+@ms_dos_ok:
+ SUB AX,AX
+@ms_dos_ret:
+END;
+
+Function MS_X_Open(FileName:PChar;Mode:Byte):Word;Assembler;ASM
+ PUSH DS
+  MOV AH,MSDOS.MS_X_OPEN
+  LDS DX,FileName
+  MOV AL,Mode
+  INT DOS_INT
+ POP DS
+ JNC @ms_open_ret
+ NEG AX
+@ms_open_ret:
 END;
 
 Function MS_X_SetCP(GlobalCP:Word):Word;Assembler;ASM
