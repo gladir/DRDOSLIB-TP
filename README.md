@@ -9,6 +9,10 @@ Bibliothèque en Turbo Pascal permettant d'accéder aux fonctionnalités particu
     <th>Description</th>
   </tr>
   <tr>
+    <td><b>DOSIF.PAS</b></td>
+    <td>Cette unité contient les définitions, procédures et fonctions pour le format d'échange du DOS.</td>
+  </tr>
+  <tr>
     <td><b>IDLE.PAS</b></td>
     <td>Cette unité contient les définitions de l'IDLE.</td>
   </tr>
